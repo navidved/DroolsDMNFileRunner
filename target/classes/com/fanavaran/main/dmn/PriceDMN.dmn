@@ -1,0 +1,339 @@
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_9823A26E-051E-4BEC-82C7-ACDFECB574F2" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_C0ED1413-BE99-4D21-B97C-209BC7D0C659" name="PriceDMN" expressionLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_9823A26E-051E-4BEC-82C7-ACDFECB574F2">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_8B7B5F5F-8F55-4EE3-B593-4442722242FF" name="person" isCollection="false">
+    <dmn:itemComponent id="_FBC7B66E-F2D6-404A-B05A-186C65F4DE43" name="age" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_97C3FE88-0D6E-48EE-98C6-5DE6AB3C39BB" name="travel" isCollection="false">
+    <dmn:itemComponent id="_22112A2E-0C07-4869-900A-A18B996E8C49" name="person" isCollection="false">
+      <dmn:typeRef>person</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_F64EBF87-1C37-4680-8C08-CDE5A7B59FB0" name="daysCount" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="range" id="_72E98273-9280-458E-87E3-202B08F0A7F0">
+        <dmn:text>[1..300]</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_EEE58AC1-9A24-429E-A065-8CC1756DA3ED" name="destination" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_6E373175-A161-4A54-B6F7-EAA89CEE9564" name="coverLimit" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_631B0C6D-7F59-4E1F-B939-2BB1CB8005C2" name="TravelInputData">
+    <dmn:extensionElements/>
+    <dmn:variable id="_560D2603-79AB-43CC-8BD1-988C2BAD896E" name="TravelInputData" typeRef="travel"/>
+  </dmn:inputData>
+  <dmn:decision id="_3374A805-1D0C-4A50-8AA5-D42283FB169D" name="Insurance Cost">
+    <dmn:extensionElements/>
+    <dmn:variable id="_0F2EDE59-3B62-4FD6-8C94-9CB0F97ED160" name="Insurance Cost" typeRef="number"/>
+    <dmn:informationRequirement id="_B9E9EC12-5E7F-45B0-AA92-A49675177106">
+      <dmn:requiredInput href="#_631B0C6D-7F59-4E1F-B939-2BB1CB8005C2"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_0548AAA6-BF6D-4B1B-8282-C047CCF56BF2" hitPolicy="COLLECT" aggregation="MIN" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_28E01A09-67B3-4AA5-BF60-5ED426C24292">
+        <dmn:inputExpression id="_C304FEEF-DD68-4465-9E09-AB4FCB677190" typeRef="number">
+          <dmn:text>TravelInputData.coverLimit</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_BEA6B1E6-0F1F-4C00-A500-15402CF8572E">
+        <dmn:inputExpression id="_AC656978-27F1-4B86-8DA2-AE7E61191ECC" typeRef="number">
+          <dmn:text>TravelInputData.daysCount</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_632844F6-C55F-4742-B772-405E67E75521">
+        <dmn:inputExpression id="_B53AB674-9D74-470F-90F8-3B557C8C911E" typeRef="string">
+          <dmn:text>TravelInputData.destination</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_7E6767A0-94F6-4BA1-9FDC-18BAC95AC677">
+        <dmn:inputExpression id="_3BA827F8-5EAE-427D-BE1B-D74E33BD0D54" typeRef="person">
+          <dmn:text>TravelInputData.person.age</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_B67FDEE2-F428-4634-93B9-774B7CF9D458"/>
+      <dmn:annotation name="annotation"/>
+      <dmn:rule id="_A8444A3F-4945-4211-ABBC-8EDC26DAB9A1">
+        <dmn:inputEntry id="_5D248F93-2038-4C4B-8200-DE6526DCF15F">
+          <dmn:text>50000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_597F1DBF-733F-4F16-AE51-D6913698E5BF">
+          <dmn:text>[1..7]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_89560296-6E59-4425-8278-9B671E652CFF">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_F06B82C4-F8F8-442C-9AFD-1F7C778D1173">
+          <dmn:text>[0..12]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_752B3C09-32AA-4113-A938-346563F32295">
+          <dmn:text>240000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_855BC491-AF73-4B0D-B54F-6DB2C78981C5">
+        <dmn:inputEntry id="_3A6A096B-BEEE-4E98-9D1B-0BCF30E1FD22">
+          <dmn:text>30000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_645CB0E3-7097-4D11-8551-A60310634D9D">
+          <dmn:text>[1..7]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_FC95AA86-B9A6-4C0F-8C2A-7E7163F81709">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_0AF6B0BE-855D-4A79-B1B5-21C4C06AFFED">
+          <dmn:text>[0..12]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_95E948AF-3503-4B0C-9C5E-2829BABA3569">
+          <dmn:text>180000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_9C7E37BC-97A9-4F97-8F3F-6D7A496CB69A">
+        <dmn:inputEntry id="_DAFB468B-B3D1-4C78-9005-84F041BCA507">
+          <dmn:text>50000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_72077F9F-4BD0-46E7-B3AC-C59140CAE64F">
+          <dmn:text>[1..7]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_CF0339D6-FB17-47EE-8D0C-6CEB796E4542">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_D1E13E01-8B73-4BA3-B180-F0BC842E18F1">
+          <dmn:text>[13..65]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_A1DB9B4D-F8A7-4F4C-B1A3-50E1C3A69AAB">
+          <dmn:text>485000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_A77201D1-8C52-402E-90E7-63BC1579FA6F">
+        <dmn:inputEntry id="_71C8890F-7E51-49BE-B27F-F91229ACE96D">
+          <dmn:text>30000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_BC98F20A-7E10-4FE2-B69A-922CB1286E12">
+          <dmn:text>[1..7]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_4CE8DD08-B605-42D2-904B-652E3391128C">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_4BBA73AE-86FF-41FE-AA19-7362387F2C64">
+          <dmn:text>[13..65]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_BB2CC8C0-8BCE-42DD-8E70-E43C43120449">
+          <dmn:text>360000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_E29B56BB-4D75-4753-B8D3-686B478F97B6">
+        <dmn:inputEntry id="_08BE0B71-1527-4BB4-B47C-D427409D4490">
+          <dmn:text>50000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_2ADB4B1F-DE4D-4203-8897-5AC4423872A4">
+          <dmn:text>[1..7]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_D6D0345F-62A3-47DD-B44E-794B16CEA735">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_AFA09BD0-5E7C-4E6F-B7E4-44320FD62C4F">
+          <dmn:text>[66..70]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_726F6FF3-BED0-4B30-ADA6-F9E3B57C3808">
+          <dmn:text>725000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_9D681344-F0F1-40CB-9BEC-5A82C5CEC683">
+        <dmn:inputEntry id="_4C11E558-9289-4420-97E8-50930E472389">
+          <dmn:text>30000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_E5B4E2AC-635B-4A89-BE52-2A698D672BFD">
+          <dmn:text>[1..7]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_DFB5E297-274F-4C6D-9243-5D5B3C9C81A5">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_6EDB3610-DD85-4985-9A84-5721DB2362A1">
+          <dmn:text>[66..70]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_C6545E1A-574F-4004-89B5-2217A250B9AD">
+          <dmn:text>545000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_F5DD95B8-7CE1-4872-B39E-9D3D5AB8216A">
+        <dmn:inputEntry id="_0BDC0993-62C1-4966-A7EE-CBE08E317ABC">
+          <dmn:text>50000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_37096137-74A4-4234-84A5-BA5DFD323AB3">
+          <dmn:text>[8..15]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_E2A05C75-DECE-4255-A53D-557645BD9B05">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_167A8F75-FA34-48DE-B94D-AEB89553D905">
+          <dmn:text>[0..12]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_092C8C48-576C-4231-836B-28740102BA2D">
+          <dmn:text>490000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_BF799EEA-326F-4132-B301-F0B152D7690A">
+        <dmn:inputEntry id="_2F178089-3E5F-49E0-8BE3-78046A7CB074">
+          <dmn:text>30000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_1F0D3F54-D1A7-4641-9330-13C14E738C0F">
+          <dmn:text>[8..15]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_20DDB3DC-6C2E-40EC-B140-EAC4CCC99210">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_CA14B946-656A-478D-BC7A-801A8DC9C312">
+          <dmn:text>[0..12]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_6F871BD2-3BCF-451E-9657-98BE49E6274E">
+          <dmn:text>365000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_EB440E89-1A87-434E-B73A-888A67674DA7">
+        <dmn:inputEntry id="_5186D3AC-B71E-4479-BECA-E95C2ABC5373">
+          <dmn:text>50000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_7E1F1097-AB57-4886-9534-0950A5897FCF">
+          <dmn:text>[8..15]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_183FD70A-69BA-48FB-B120-1EB711960438">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_C4A9153F-35EF-42AF-A106-3C7966F8EB47">
+          <dmn:text>[13..65]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_A5984799-DC60-4E01-895B-4F4E89A43959">
+          <dmn:text>975000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_1F8A0F4D-B8BB-4707-86D9-2E40DB0DD467">
+        <dmn:inputEntry id="_A4FF1D44-525B-408C-80F6-5D6573ECA416">
+          <dmn:text>30000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_527AD600-7AC5-4F26-93C7-838B0D0EE731">
+          <dmn:text>[8..15]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_1C9E776A-E6DB-4854-BCB4-44521F02278D">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_EA060BB3-BC78-429B-8536-85C7D85A9B13">
+          <dmn:text>[13..65]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_1834D491-E69C-4836-862A-F23A293A811C">
+          <dmn:text>730000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_D04B4814-6865-408A-96F9-6C73F4E646B6">
+        <dmn:inputEntry id="_E8C041A2-B4D7-4981-80B7-2C1FEF188267">
+          <dmn:text>50000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_5E8FAD90-C38A-4CE5-A6B2-44E98B64DA2E">
+          <dmn:text>[8..15]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_586626AB-B354-4915-A9BE-40CBDD9C98AB">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_655A693E-A994-4309-8CCE-540AB48557FA">
+          <dmn:text>[66..70]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_F6068AD2-3773-4836-A810-E03C5883CBAB">
+          <dmn:text>1460000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_862E5F05-AD38-4C53-93F9-D6F205DFB2A5">
+        <dmn:inputEntry id="_A46AD77F-0D4B-48AB-BC90-193043FEFDC1">
+          <dmn:text>30000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_9CB7ADF3-2569-422A-A648-4C03037435F9">
+          <dmn:text>[8..15]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_8268F7A1-C00D-47CB-B34C-8014B22C6442">
+          <dmn:text>"Schengen"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_88DDC682-10F3-4917-8127-B8B125FB06BF">
+          <dmn:text>[66..70]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_CC4A68F4-D100-49AB-BCD1-4B5C4FD9640C">
+          <dmn:text>1100000</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_CEC2DD67-7783-4A9E-8D70-FAB5401D9816" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_0548AAA6-BF6D-4B1B-8282-C047CCF56BF2">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>113</kie:width>
+            <kie:width>199</kie:width>
+            <kie:width>135</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_631B0C6D-7F59-4E1F-B939-2BB1CB8005C2" dmnElementRef="_631B0C6D-7F59-4E1F-B939-2BB1CB8005C2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="155" y="78" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_3374A805-1D0C-4A50-8AA5-D42283FB169D" dmnElementRef="_3374A805-1D0C-4A50-8AA5-D42283FB169D" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="335" y="78" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_B9E9EC12-5E7F-45B0-AA92-A49675177106" dmnElementRef="_B9E9EC12-5E7F-45B0-AA92-A49675177106">
+        <di:waypoint x="255" y="103"/>
+        <di:waypoint x="335" y="103"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>

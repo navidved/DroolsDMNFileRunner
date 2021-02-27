@@ -7,6 +7,7 @@ import org.kie.api.builder.KieFileSystem;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.builder.Results;
 import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieRuntimeFactory;
 import org.kie.dmn.api.core.DMNContext;
 import org.kie.dmn.api.core.DMNModel;
 import org.kie.dmn.api.core.DMNResult;
@@ -16,7 +17,14 @@ import org.kie.internal.builder.InternalKieBuilder;
 import org.kie.api.io.Resource;
 import org.kie.api.builder.Message;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+
+import com.fanavaran.main.model.person;
+import com.fanavaran.main.model.travel;
+
 import org.kie.dmn.core.compiler.RuntimeTypeCheckOption;
 import org.kie.dmn.core.api.DMNFactory;
 import static org.hamcrest.CoreMatchers.is;
@@ -73,15 +81,38 @@ public class DMNRunner {
 
     public static void main(String[] args) {
         disableWarning();
-
         System.out.println("> Run DMN");
-        new DMNRunner().executeTest(50, 20, 30);
+        // new DMNRunner().executeTest(44, 20, 24);
+        new DMNRunner().executeTravelTest();
         System.out.println("> Done!");
     }
+
+    private void executeTravelTest() {
+        String TravelDMNFileName = "PriceDMN";
+        String TravelDMNFilePath = "dmn/" + TravelDMNFileName + ".dmn";
+        final DMNRuntime runtime = createRuntime(TravelDMNFilePath, this.getClass());
+        final DMNModel dmnModel = runtime.getModelById("https://kiegroup.org/dmn/_9823A26E-051E-4BEC-82C7-ACDFECB574F2", "_C0ED1413-BE99-4D21-B97C-209BC7D0C659");
+        final DMNContext context = DMNFactory.newContext();
+
+        final Map<String, Object> p = new HashMap<>();
+        p.put( "age", 35 );
+        final Map<String, Object> t = new HashMap<>();
+        t.put( "daysCount", 5 );
+        t.put( "destination", "Schengen" );
+        t.put( "coverLimit", 30000 );
+        t.put( "person", p );
+        context.set("TravelInputData", t);
+        
+        final DMNResult dmnResult = runtime.evaluateAll(dmnModel, context);
+        final DMNContext result = dmnResult.getContext();
+        System.out.println("Price: " + result.get("Insurance Cost"));
+    }
+
 
     private void executeTest(final int age, final int yearsService, final int expectedVacationDays) {
         final DMNRuntime runtime = createRuntime(DMNFilePath, this.getClass());
         final DMNModel dmnModel = runtime.getModel("https://www.drools.org/kie-dmn", DMNFileName);
+        
         assertThat(dmnModel, notNullValue());
         final DMNContext context = DMNFactory.newContext();
         context.set("Age", age);
