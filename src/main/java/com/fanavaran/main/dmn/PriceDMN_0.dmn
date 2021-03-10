@@ -53,6 +53,11 @@
           <dmn:text>TravelInputData.person.age</dmn:text>
         </dmn:inputExpression>
       </dmn:input>
+      <dmn:input id="_623E6D68-88AE-4964-9368-E3675A5541CA">
+        <dmn:inputExpression id="_E4F240F0-C8B6-42A7-A04E-F469ADCD97BE" typeRef="number">
+          <dmn:text>result</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
       <dmn:output id="_B67FDEE2-F428-4634-93B9-774B7CF9D458"/>
       <dmn:annotation name="annotation"/>
       <dmn:rule id="_A8444A3F-4945-4211-ABBC-8EDC26DAB9A1">
@@ -67,6 +72,9 @@
         </dmn:inputEntry>
         <dmn:inputEntry id="_F06B82C4-F8F8-442C-9AFD-1F7C778D1173">
           <dmn:text>[0..12]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_8BADDB53-A234-41B4-B140-73F12C56243A">
+          <dmn:text>&gt;1</dmn:text>
         </dmn:inputEntry>
         <dmn:outputEntry id="_752B3C09-32AA-4113-A938-346563F32295">
           <dmn:text>240000</dmn:text>
@@ -88,6 +96,9 @@
         <dmn:inputEntry id="_0AF6B0BE-855D-4A79-B1B5-21C4C06AFFED">
           <dmn:text>[0..12]</dmn:text>
         </dmn:inputEntry>
+        <dmn:inputEntry id="_34E5AC28-9AEB-4088-8F7F-C21BDECE6A5F">
+          <dmn:text>&gt;1</dmn:text>
+        </dmn:inputEntry>
         <dmn:outputEntry id="_95E948AF-3503-4B0C-9C5E-2829BABA3569">
           <dmn:text>180000</dmn:text>
         </dmn:outputEntry>
@@ -107,6 +118,9 @@
         </dmn:inputEntry>
         <dmn:inputEntry id="_D1E13E01-8B73-4BA3-B180-F0BC842E18F1">
           <dmn:text>[13..65]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_40A3194A-3113-452C-B745-3DF2FA1246B5">
+          <dmn:text>&gt;1</dmn:text>
         </dmn:inputEntry>
         <dmn:outputEntry id="_A1DB9B4D-F8A7-4F4C-B1A3-50E1C3A69AAB">
           <dmn:text>485000</dmn:text>
@@ -128,6 +142,9 @@
         <dmn:inputEntry id="_4BBA73AE-86FF-41FE-AA19-7362387F2C64">
           <dmn:text>[13..65]</dmn:text>
         </dmn:inputEntry>
+        <dmn:inputEntry id="_F03BAC6A-86B7-430E-92B2-5D9C253F11B5">
+          <dmn:text>&gt;1</dmn:text>
+        </dmn:inputEntry>
         <dmn:outputEntry id="_BB2CC8C0-8BCE-42DD-8E70-E43C43120449">
           <dmn:text>360000</dmn:text>
         </dmn:outputEntry>
@@ -147,6 +164,9 @@
         </dmn:inputEntry>
         <dmn:inputEntry id="_AFA09BD0-5E7C-4E6F-B7E4-44320FD62C4F">
           <dmn:text>[66..70]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_0E9BD7E3-062E-4F60-803B-633C80C28580">
+          <dmn:text>&gt;1</dmn:text>
         </dmn:inputEntry>
         <dmn:outputEntry id="_726F6FF3-BED0-4B30-ADA6-F9E3B57C3808">
           <dmn:text>725000</dmn:text>
@@ -168,6 +188,9 @@
         <dmn:inputEntry id="_6EDB3610-DD85-4985-9A84-5721DB2362A1">
           <dmn:text>[66..70]</dmn:text>
         </dmn:inputEntry>
+        <dmn:inputEntry id="_21ED3082-FC0D-4A58-B0B7-04795C3AEE78">
+          <dmn:text>&gt;1</dmn:text>
+        </dmn:inputEntry>
         <dmn:outputEntry id="_C6545E1A-574F-4004-89B5-2217A250B9AD">
           <dmn:text>545000</dmn:text>
         </dmn:outputEntry>
@@ -187,6 +210,9 @@
         </dmn:inputEntry>
         <dmn:inputEntry id="_167A8F75-FA34-48DE-B94D-AEB89553D905">
           <dmn:text>[0..12]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_9EDF980F-0D7F-42EC-96E3-474A54D59F1D">
+          <dmn:text>&gt;1</dmn:text>
         </dmn:inputEntry>
         <dmn:outputEntry id="_092C8C48-576C-4231-836B-28740102BA2D">
           <dmn:text>490000</dmn:text>
@@ -208,6 +234,9 @@
         <dmn:inputEntry id="_CA14B946-656A-478D-BC7A-801A8DC9C312">
           <dmn:text>[0..12]</dmn:text>
         </dmn:inputEntry>
+        <dmn:inputEntry id="_B3C0676B-FDB4-4ABC-8441-9482764E04E4">
+          <dmn:text>&gt;1</dmn:text>
+        </dmn:inputEntry>
         <dmn:outputEntry id="_6F871BD2-3BCF-451E-9657-98BE49E6274E">
           <dmn:text>365000</dmn:text>
         </dmn:outputEntry>
@@ -227,6 +256,9 @@
         </dmn:inputEntry>
         <dmn:inputEntry id="_C4A9153F-35EF-42AF-A106-3C7966F8EB47">
           <dmn:text>[13..65]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_B7CB3FD8-2DB1-4DB4-9619-9A4002CB79B4">
+          <dmn:text>&gt;1</dmn:text>
         </dmn:inputEntry>
         <dmn:outputEntry id="_A5984799-DC60-4E01-895B-4F4E89A43959">
           <dmn:text>975000</dmn:text>
@@ -248,6 +280,9 @@
         <dmn:inputEntry id="_EA060BB3-BC78-429B-8536-85C7D85A9B13">
           <dmn:text>[13..65]</dmn:text>
         </dmn:inputEntry>
+        <dmn:inputEntry id="_BA020F37-7B02-4E26-804D-D2C82F451D44">
+          <dmn:text>&gt;1</dmn:text>
+        </dmn:inputEntry>
         <dmn:outputEntry id="_1834D491-E69C-4836-862A-F23A293A811C">
           <dmn:text>730000</dmn:text>
         </dmn:outputEntry>
@@ -267,6 +302,9 @@
         </dmn:inputEntry>
         <dmn:inputEntry id="_655A693E-A994-4309-8CCE-540AB48557FA">
           <dmn:text>[66..70]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_E974C3BB-FE95-4703-B58F-BF8CFA164BB1">
+          <dmn:text>&gt;1</dmn:text>
         </dmn:inputEntry>
         <dmn:outputEntry id="_F6068AD2-3773-4836-A810-E03C5883CBAB">
           <dmn:text>1460000</dmn:text>
@@ -288,6 +326,9 @@
         <dmn:inputEntry id="_88DDC682-10F3-4917-8127-B8B125FB06BF">
           <dmn:text>[66..70]</dmn:text>
         </dmn:inputEntry>
+        <dmn:inputEntry id="_06A7A8E0-4047-4C58-A88F-10ABB8229616">
+          <dmn:text>&gt;1</dmn:text>
+        </dmn:inputEntry>
         <dmn:outputEntry id="_CC4A68F4-D100-49AB-BCD1-4B5C4FD9640C">
           <dmn:text>1100000</dmn:text>
         </dmn:outputEntry>
@@ -307,6 +348,7 @@
             <kie:width>100</kie:width>
             <kie:width>113</kie:width>
             <kie:width>199</kie:width>
+            <kie:width>100</kie:width>
             <kie:width>135</kie:width>
             <kie:width>100</kie:width>
           </kie:ComponentWidths>

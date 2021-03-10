@@ -7,7 +7,6 @@ import org.kie.api.builder.KieFileSystem;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.builder.Results;
 import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.KieRuntimeFactory;
 import org.kie.dmn.api.core.DMNContext;
 import org.kie.dmn.api.core.DMNModel;
 import org.kie.dmn.api.core.DMNResult;
@@ -16,14 +15,15 @@ import org.kie.dmn.core.impl.DMNRuntimeImpl;
 import org.kie.internal.builder.InternalKieBuilder;
 import org.kie.api.io.Resource;
 import org.kie.api.builder.Message;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 
-import com.fanavaran.main.model.person;
-import com.fanavaran.main.model.travel;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import org.kie.dmn.core.compiler.RuntimeTypeCheckOption;
 import org.kie.dmn.core.api.DMNFactory;
@@ -37,6 +37,7 @@ public class DMNRunner {
 
     static String DMNFileName;
     static String DMNFilePath;
+    public final List<Map<String, Object>> person = new ArrayList<>();
 
     @Test
     public void testSolutionCase1() {
@@ -75,37 +76,100 @@ public class DMNRunner {
 
     public DMNRunner() {
         org.apache.log4j.Logger.getRootLogger().setLevel(org.apache.log4j.Level.OFF);
-        DMNFileName = "0020-vacation-days";
-        DMNFilePath = "dmn/" + DMNFileName + ".dmn";
+        // DMNFileName = "0020-vacation-days";
+        // DMNFilePath = "dmn/" + DMNFileName + ".dmn";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         disableWarning();
         System.out.println("> Run DMN");
+        // String res = CallAPI.GetUserRequest(3);
+        // System.out.println(res);
         // new DMNRunner().executeTest(44, 20, 24);
-        new DMNRunner().executeTravelTest();
+        // new DMNRunner().executeTravelTest();
+        new DMNRunner().executeTravelListTest();
         System.out.println("> Done!");
     }
 
     private void executeTravelTest() {
-        String TravelDMNFileName = "PriceDMN";
+        String TravelDMNFileName = "TravelDMN";
         String TravelDMNFilePath = "dmn/" + TravelDMNFileName + ".dmn";
         final DMNRuntime runtime = createRuntime(TravelDMNFilePath, this.getClass());
         final DMNModel dmnModel = runtime.getModelById("https://kiegroup.org/dmn/_9823A26E-051E-4BEC-82C7-ACDFECB574F2", "_C0ED1413-BE99-4D21-B97C-209BC7D0C659");
         final DMNContext context = DMNFactory.newContext();
 
         final Map<String, Object> p = new HashMap<>();
-        p.put( "age", 35 );
+        p.put( "age", 11 );
         final Map<String, Object> t = new HashMap<>();
         t.put( "daysCount", 5 );
         t.put( "destination", "Schengen" );
         t.put( "coverLimit", 30000 );
         t.put( "person", p );
-        context.set("TravelInputData", t);
+        context.set("Travel", t);
         
         final DMNResult dmnResult = runtime.evaluateAll(dmnModel, context);
         final DMNContext result = dmnResult.getContext();
-        System.out.println("Price: " + result.get("Insurance Cost"));
+        System.out.println("Price: " + result.get("Price"));
+    }
+
+    public class Person{
+        public int age;
+    }
+    
+    public class Travel{
+        public int daysCount;
+        public String destination;
+        public int coverLimit;
+        public List<Person> persons;
+    }
+    
+    private void executeTravelListTest() {
+
+        String TravelDMNFileName = "IterationPriceDMN";
+        String TravelDMNFilePath = "dmn/" + TravelDMNFileName + ".dmn";
+        final DMNRuntime runtime = createRuntime(TravelDMNFilePath, this.getClass());
+        final DMNModel dmnModel = runtime.getModelById("https://kiegroup.org/dmn/_9823A26E-051E-4BEC-82C7-ACDFECB574F2", "_C0ED1413-BE99-4D21-B97C-209BC7D0C659");
+        final DMNContext context = DMNFactory.newContext();
+
+        final List<Map<String, Object>> persons = new ArrayList<>();
+        final Map<String, Object> p1 = new HashMap<>();
+        p1.put("age", 35);
+        persons.add(p1);
+
+
+        final Map<String, Object> p2 = new HashMap<>();
+        p2.put("age", 10);
+        person.add(p2);
+
+        final Map<String, Object> t = new HashMap<>();
+        t.put( "daysCount", 15 );
+        t.put( "destination", "Schengen" );
+        t.put( "coverLimit", 30000 );
+        t.put( "persons", persons);
+        context.set("Travel", t);
+
+        // Person p1 = new Person();
+        // p1.age = 10;
+
+        // Person p2 = new Person();
+        // p2.age = 35;
+
+        // List<Person> persons = new ArrayList<Person>();  
+        // persons.add(p1);
+        // // persons.add(p2);
+
+        // Travel trl = new Travel();
+        // trl.coverLimit = 30000;
+        // trl.daysCount = 5;
+        // trl.destination = "Schengen";
+        // trl.persons = persons;
+
+        // context.set("Travel", trl);
+
+
+        final DMNResult dmnResult = runtime.evaluateAll(dmnModel, context);
+        final DMNContext result = dmnResult.getContext();
+        System.out.println("Price: " + result.get("travelPrice"));
     }
 
 
